@@ -26,7 +26,7 @@ C=Fore.CYAN
 
 S=Style.BRIGHT
 
-with open("config.json","r") as file:
+with open("Script/config.json","r") as file:
     config=json.load(file)
 
 """
@@ -51,7 +51,7 @@ reg_play=r"^clash\s+(fastest|shortest|reverse|f|r|s)\s*$|^clash\s*$"
 reg_quit=r"^(quit|q)\s*$"
 
 
-banner = f'''{Y}
+banner = fr'''{Y}
                                                                                                                                                                                                             
   ,----..     ,--,                                 ,---,       ,-.----.                                
  /   /   \  ,--.'|                               ,--.' |       \    /  \                               
@@ -72,6 +72,13 @@ banner = f'''{Y}
 {W}Visit us at {C+S}https://github.com/Scriptmagum
 '''
 def main():
+    if config["init"]:
+        InitClash=Clash(config)
+        InitClash.fetch_clashes()
+        config["init"]=(7==5) #lol
+        with open("Script/config.json","w",encoding="utf-8") as file:
+            file.write(json.dumps(config,indent=2))
+        del InitClash
 
 # Display the banner of scriptclash 
     print(banner)
@@ -86,7 +93,7 @@ def main():
             if match_clash:
                 mode=match_clash.group(1).lower() if match_clash.group(1) else random.choice(["fastest","shortest","reverse"])
                 mode="fastest"if mode=='f' else "reverse"if mode=='r' else "shortest" if mode=='s' else mode
-                clash=Clash(mode,config)
+                clash=Clash(config,mode)
                 clash.begin()
 
             elif match_quit:

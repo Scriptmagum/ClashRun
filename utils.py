@@ -1,6 +1,7 @@
 import sys,os
 import json
 import re
+import time
 try:
     import requests,colorama
 except ModuleNotFoundError:
@@ -44,11 +45,12 @@ https://www.codingame.com/services/Contribution/getAcceptedContributions
     "downVotes": 0
 }
 """
+    
 
 
 class Clash:
 
-    def __init__(self,mode:str,config:dict):
+    def __init__(self,config:dict,mode="fastest"):
         self.config=config
         self.mode=mode
         self.start=False
@@ -66,6 +68,27 @@ class Clash:
         p2=r"\{\{(.+?)\}\}"
         parse=re.sub(p2,fr"{G}\1{W}",re.sub(p1,fr"{y}\1{b}",statement))
         return parse
+    def fetch_clashes(self):
+        Clashrun_dir=os.path.join(os.environ.get("APPDATA"),"Clashrun")
+        os.makedirs(Clashrun_dir,exist_ok=True)
+        print(f"{C+S}fetching clashes...")
+        time.sleep(2.7)
+        print(f"{C+S}[{G}+{C+S}] payload sending...")
+        response=requests.get(self.config["clashes_site"])
+        response.raise_for_status()
+        time.sleep(2.5)
+        print(f"{C+S}[{G}+{C+S}] get accepted contribution clash")
+        
+        with open(os.path.join(Clashrun_dir,"Clash.json"),"w",encoding="utf-8") as file:
+            try:
+                file.write(response.text)
+                time.sleep(2.3)
+                print(f"{C+S}[{G}+{C+S}] fetch succesfull")
+
+            except FileNotFoundError:
+                print("File or directory not found")
+
+        print()
     
     def fetch_clash(self,handle:str):
        
