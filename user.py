@@ -1,2 +1,1 @@
-s=input()
-print(eval(s[0]+s[2]+s[1]))
+print(int(input())+9)

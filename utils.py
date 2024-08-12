@@ -155,14 +155,19 @@ class Clash:
             with open("err.txt","r") as f:
                 err=f.read()
             if out.rstrip()==test.get("testOut"):
+                print(f"{Y+S}standart ouput:")
+                print(out.rstrip())
                 print(f"success  [{G}X{W}]")
-                print(out)
                 time.sleep(1)
             else:
-                if err:print(err)
+                if err:print(f"{R+S}{err}")
                 else:
+                    print(f"{Y+S}standart ouput:")
+                    print(out.rstrip())
+                    print(f"{Y+S}Expected:")
+                    print(test.get("testOut"))
                     print(f"unsuccess  [{R}X{W}]")
-                    print(out)
+                   
                 return False
                 
 
@@ -186,7 +191,7 @@ class Clash:
         else:
             print()
             print(f"{W+S}mode: {C}{self.mode}\n")
-            print("This mode there is no statement,you're be given \nsomes inputs,outputs,and just solve the problem\n")
+            print("The game mode is REVERSE: You don't have access to the statement. You need to figure out what to do by looking at the following test sets:\n")
             for i in range(min(len(self.testCases),8)):
                 print(f"{G}test{i+1}:")
                 print(f"{Y+S}input:{W}\n{self.testCases[i].get("testIn")}")
@@ -202,7 +207,6 @@ class Clash:
                         self.time=1
                         self.end=True
                         break
-                    else:print("incorrect")
                     #return a boolean True if succed false if not
                 elif re.search(r"^(time|t)\s*$",game,re.IGNORECASE):
                     print(self.time)
