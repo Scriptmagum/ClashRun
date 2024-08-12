@@ -55,7 +55,7 @@ class Clash:
     def __init__(self,config:dict,mode="fastest"):
         self.config=config
         self.mode=mode
-        self.start=False
+        self._pass=False
         self.end=False
         self.time=config["time"]
         self.statement=None
@@ -139,12 +139,12 @@ class Clash:
         while self.time:
             time.sleep(1.5)
             self.time-=1
-        if not self.end:
+        if not self.end and not self._pass:
+            print()
             self.check()
     
 
     def check(self)->bool:
-        print()
         answers=[]
         for test in self.testCases:
             with open("in.txt","w",encoding="utf-8") as f:
@@ -154,10 +154,10 @@ class Clash:
                 out=f.read()
             with open("err.txt","r") as f:
                 err=f.read()
-            if out==test.get("testOut"):
-                print(f"success  [{G}-{W}]")
+            if out.rstrip()==test.get("testOut"):
+                print(f"success  [{G}X{W}]")
                 print(out)
-                time.sleep(2)
+                time.sleep(1)
             else:
                 if err:print(err)
                 else:
@@ -187,7 +187,7 @@ class Clash:
             print()
             print(f"{W+S}mode: {C}{self.mode}\n")
             print("This mode there is no statement,you're be given \nsomes inputs,outputs,and just solve the problem\n")
-            for i in range(min(len(self.testCases),6)):
+            for i in range(min(len(self.testCases),8)):
                 print(f"{G}test{i+1}:")
                 print(f"{Y+S}input:{W}\n{self.testCases[i].get("testIn")}")
                 print(f"{Y+S}output:{W}\n{self.testCases[i].get("testOut")}")
@@ -199,7 +199,7 @@ class Clash:
                 if re.search(r"^(run|r)\s*$",game,re.IGNORECASE):
                     result=self.check()
                     if result:
-                        self.time=2
+                        self.time=1
                         self.end=True
                         break
                     else:print("incorrect")
@@ -207,7 +207,8 @@ class Clash:
                 elif re.search(r"^(time|t)\s*$",game,re.IGNORECASE):
                     print(self.time)
                 elif re.search(r"^(pass|p)\s*$",game,re.IGNORECASE):
-                    self.time=2
+                    self.time=1
+                    self._pass=True
                     break
 
             else:
