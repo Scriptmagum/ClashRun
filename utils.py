@@ -8,47 +8,25 @@ try:
     import requests,colorama
 except ModuleNotFoundError:
     os.system("pip install requests  colorama")
-
 from colorama import Fore,Back,init,Style
-init(autoreset=True)
-B=Fore.BLUE
 
-R=Fore.RED
+init(autoreset=True)
+
+B,_b=Fore.BLUE,Back.BLUE
+
+R,r=Fore.RED,Back.RED
 
 Y,y=Fore.YELLOW,Back.YELLOW
 
-G=Fore.GREEN
+G,g=Fore.GREEN,Back.GREEN
 
 W,w=Fore.WHITE,Back.WHITE
 
-b=Back.BLACK
-C=Fore.CYAN
+C,c=Fore.CYAN,Back.CYAN
+
+B,b=Fore.BLACK,Back.BLACK
 
 S=Style.BRIGHT
-
-"""
-https://www.codingame.com/services/Contribution/getAcceptedContributions
-{
-    "id": 101820,
-    "activeVersion": 5,
-    "score": 2,
-    "votableId": 34598400,
-    "codingamerId": 6206333,
-    "views": 48,
-    "commentableId": 34446541,
-    "title": "Transposing data",
-    "status": "ACCEPTED",
-    "type": "CLASHOFCODE",
-    "nickname": "PackSciences",
-    "publicHandle": "101820b76b348c4c0a17c3c5eeb697c498480c",
-    "codingamerHandle": "c448fe147c5dc418c85052ea23e478ba3336026",
-    "commentCount": 8,
-    "upVotes": 2,
-    "downVotes": 0
-}
-"""
-    
-
 
 class Clash:
 
@@ -67,24 +45,20 @@ class Clash:
         self.testCases=None
         self.Clashrun_dir=os.path.join(os.environ.get("APPDATA"),"Clashrun")
         self.Clash_file=os.path.join(self.Clashrun_dir,"Clash.json")
-    
-    def find_clash(self,handle:str):
-        with open(self.Clash_file,"r") as file:
-            clashes=json.load(file)
         
-
     def parser(self,statement:str):
         p1=r"\[\[(.+?)\]\]"
         p2=r"\{\{(.+?)\}\}"
         p3=r"\<\<(.+?)\>\>"
         parse=re.sub(p3,fr"{Y+S}\1{W}",re.sub(p2,fr"{C}\1{W}",re.sub(p1,fr"{y}\1{b}",statement)))
         return parse
+    
     def fetch_clashes(self):
         os.makedirs(self.Clashrun_dir,exist_ok=True)
         print(f"{C+S}fetching clashes...")
         time.sleep(2.7)
         print(f"{C+S}[{G}+{C+S}] payload sending...")
-        clash=requests.get(self.config["clashes_site"])
+        clash=requests.get(self.config["site"])
         clash.raise_for_status()
         time.sleep(2.5)
         print(f"{C+S}[{G}+{C+S}] get accepted contribution clash")
@@ -122,19 +96,18 @@ class Clash:
         else:
             with open(os.path.join(self.Clashrun_dir,"shortest_handles.json"),"r") as k:
                 h=json.load(k)
-        #print(h)
         with open(os.path.join(self.Clash_file),"r",encoding="utf-8") as k:
                 clashes=json.load(k)
         clash=clashes[random.randint(0,len(h)-1)]
-
         data=clash.get("lastVersion").get("data")
         self.title=data.get("title")
         self.statement=self.parser(data.get("statement"))
         self.solution=data.get("solution")
         self.constraints=self.parser(data.get("constraints")if data.get("constraints")else "")
         self.inputDescription=self.parser(data.get("inputDescription"))
-        self.outputtDescription=self.parser(data.get("outputDescription"))
+        self.outputDescription=self.parser(data.get("outputDescription"))
         self.testCases=data.get("testCases")
+
     def init_timer(self):
         while self.time:
             time.sleep(1.5)
@@ -143,7 +116,6 @@ class Clash:
             print()
             self.check()
     
-
     def check(self)->bool:
         answers=[]
         for test in self.testCases:
@@ -154,11 +126,11 @@ class Clash:
                 out=f.read()
             with open("err.txt","r") as f:
                 err=f.read()
-            if out.rstrip()==test.get("testOut"):
+            if out.rstrip()==test.get("testOut").rstrip():
                 print(f"{Y+S}standart ouput:")
                 print(out.rstrip())
                 print(f"success  [{G}X{W}]")
-                time.sleep(1)
+                time.sleep(0.4)
             else:
                 if err:print(f"{R+S}{err}")
                 else:
@@ -166,17 +138,11 @@ class Clash:
                     print(out.rstrip())
                     print(f"{Y+S}Expected:")
                     print(test.get("testOut"))
-                    print(f"unsuccess  [{R}X{W}]")
-                   
+                    print(f"unsuccess  [{R}X{W}]")    
                 return False
-                
-
-
         return True
-
-    def begin(self):
-        self.start=True
-        self.fetch_clash()
+    
+    def clash_description(self):
         if (self.mode=="fastest" or self.mode=="shortest"):
             print()
             print(f"{W+S}mode: {C}{self.mode}\n")
@@ -196,6 +162,11 @@ class Clash:
                 print(f"{G}test{i+1}:")
                 print(f"{Y+S}input:{W}\n{self.testCases[i].get("testIn")}")
                 print(f"{Y+S}output:{W}\n{self.testCases[i].get("testOut")}")
+
+    def begin(self):
+        self.start=True
+        self.fetch_clash()
+        self.clash_description()
         t=threading.Thread(target=self.init_timer)
         t.start()
         while True:
@@ -207,14 +178,14 @@ class Clash:
                         self.time=1
                         self.end=True
                         break
-                    #return a boolean True if succed false if not
                 elif re.search(r"^(time|t)\s*$",game,re.IGNORECASE):
                     print(self.time)
                 elif re.search(r"^(pass|p)\s*$",game,re.IGNORECASE):
                     self.time=1
                     self._pass=True
                     break
-
+                elif re.search(r"^(open|o)\s*$",game,re.IGNORECASE):
+                    os.system("code user.py")
             else:
                 print("time out")
                 break
