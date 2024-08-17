@@ -10,6 +10,8 @@ try:
     import requests
 except ModuleNotFoundError:
     os.system("pip install requests")
+    import requests
+
 
 
 class Clash:
@@ -178,7 +180,7 @@ class Clash:
                     break
                 elif re.search(r"^(open|o)\s*$",game,re.IGNORECASE):
                     #editor="vi"if platform=="posix" else "code"
-                    os.system(f"{config["editor"]}  user.py")
+                    os.system(f"{config['editor']}  user.py")
                     #command=[config["editor"],"user.py"]
                     #subprocess.run(command)#by defauft stdout,stderr is not capture,subprocess.PIPE
             else:

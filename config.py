@@ -1,10 +1,10 @@
 import os
 import json
 try:
-    import colorama
+    from colorama import Fore,Back,Style,init
 except ModuleNotFoundError:
     os.system("pip install colorama")
-from colorama import Fore,Back,Style,init
+    from colorama import Fore,Back,Style,init
 init(autoreset=True)
 
 B,_b=Fore.BLUE,Back.BLUE
