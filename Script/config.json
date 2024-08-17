@@ -1,5 +1,5 @@
 {
-  "init":true,
+  "init": true,
   "findcontribution": "https://www.codingame.com/services/Contribution/findcontribution",
   "acceptedcontribution": "https://www.codingame.com/services/Contribution/getAcceptedContributions",
   "cookies": {

@@ -33,7 +33,7 @@ class Clash:
         p1=r"\[\[(.+?)\]\]"
         p2=r"\{\{(.+?)\}\}"
         p3=r"\<\<(.+?)\>\>"
-        parse=re.sub(p3,fr"{Y+S}\1{W}",re.sub(p2,fr"{C}\1{W}",re.sub(p1,fr"{y}\1{b}",statement)))
+        parse=re.sub(p3,fr"{Y+S}\1{reset}{W}",re.sub(p2,fr"{C}\1{reset}{W}",re.sub(p1,fr"{y}\1{reset}{W}",statement)))
         return parse
     
     def fetch_clashes(self):
@@ -121,7 +121,7 @@ class Clash:
             if out.rstrip()==test.get("testOut").rstrip():
                 print(f"{Y+S}standart ouput:")
                 print(out.rstrip())
-                print(f"{g}success{b}  [{G}X{W}]")
+                print(f"{g}success{reset}{W}  [{G}X{W}]")
                 time.sleep(0.4)
             else:
                 if err:print(f"{R+S}{err}")
@@ -129,8 +129,8 @@ class Clash:
                     print(f"{Y+S}standart ouput:")
                     print(out.rstrip())
                     print(f"{Y+S}Expected:")
-                    print(test.get("testOut"))
-                    print(f"{r}unsuccess{b}  [{R}X{W}]")    
+                    print(test.get('testOut'))
+                    print(f"{r}unsuccess{reset}{W}  [{R}X{W}]")    
                 return False
         return True
     
@@ -144,16 +144,16 @@ class Clash:
             print(f"{W+S}output description:\n{W}{self.outputDescription}\n"if self.outputDescription else "")
             print(f"{R+S}contraintes: {W}{self.constraints}\n")
             print(f"{G}exemple.test:")
-            print(f"{Y+S}input:{W}\n{self.testCases[0].get("testIn")}")
-            print(f"{Y+S}output:{W}\n{self.testCases[0].get("testOut")}")
+            print(f"{Y+S}input:{W}\n{self.testCases[0].get('testIn')}")
+            print(f"{Y+S}output:{W}\n{self.testCases[0].get('testOut')}")
         else:
             print()
             print(f"{W+S}mode: {C}{self.mode}\n")
             print("The game mode is REVERSE: You don't have access to the statement. You need to figure out what to do by looking at the following test sets:\n")
             for i in range(min(len(self.testCases),8)):
                 print(f"{G}test{i+1}:")
-                print(f"{Y+S}input:{W}\n{self.testCases[i].get("testIn")}")
-                print(f"{Y+S}output:{W}\n{self.testCases[i].get("testOut")}")
+                print(f"{Y+S}input:{W}\n{self.testCases[i].get('testIn')}")
+                print(f"{Y+S}output:{W}\n{self.testCases[i].get('testOut')}")
 
     def begin(self):
         self.start=True
@@ -162,7 +162,7 @@ class Clash:
         t=threading.Thread(target=self.init_timer)
         t.start()
         while True:
-            game=input(f"{Y}<clash\\>{W}")
+            game=input(f"{Y}<clash\\>{reset}{W}")
             if self.time:
                 if re.search(r"^(run|r)\s*$",game,re.IGNORECASE):
                     result=self.check()

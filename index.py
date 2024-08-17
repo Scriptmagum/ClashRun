@@ -43,7 +43,7 @@ def main():
 
     while True:
         try:
-            read=input(f"{Y}< \\>{W}")
+            read=input(f"{Y}<\\>{reset}{W}")
             match_clash=re.search(reg_play,read,re.IGNORECASE)
             match_quit=re.search(reg_quit,read,re.IGNORECASE)
             match_help=re.search(reg_help,read,re.IGNORECASE)

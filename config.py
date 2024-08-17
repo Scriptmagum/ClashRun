@@ -22,6 +22,7 @@ C,c=Fore.CYAN,Back.CYAN
 B,b=Fore.BLACK,Back.BLACK
 
 S=Style.BRIGHT
+reset= Style.RESET_ALL
 with open("Script/config.json","r") as file:
     config=json.load(file)
 banner = fr'''{Y}
