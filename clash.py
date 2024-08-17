@@ -26,7 +26,7 @@ class Clash:
         self.constraints=None
         self.solution=None
         self.testCases=None
-        self.Clashrun_dir=os.path.join(os.environ.get("APPDATA"),"Clashrun")
+        self.Clashrun_dir=os.path.join(os.path.expanduser("~"),".Clashrun")
         self.Clash_file=os.path.join(self.Clashrun_dir,"Clash.json")
         
     def parser(self,statement:str):
