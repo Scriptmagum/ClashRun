@@ -1,5 +1,5 @@
 {
-  "init": false,
+  "init": true,
   "findcontribution": "https://www.codingame.com/services/Contribution/findcontribution",
   "acceptedcontribution": "https://www.codingame.com/services/Contribution/getAcceptedContributions",
   "cookies": {
@@ -10,5 +10,5 @@
   },
   "time": 350,
   "site": "https://scriptmagum.github.io/me/bb89dbf7d7540eeb270d91abfd580008.json",
-  "editor": "code"
+  "editor": ""
 }
