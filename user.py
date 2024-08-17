@@ -1,10 +1,11 @@
-*m,=map(int,input().split())
-p=[]
-n=[]
-for a in m:
-    if a<0:n+=[a]
-    else:p+=[a]
-s=sum(n)
-for x in p:
-    if -x not in n:s+=x
-print(s)
+s=input()
+v=1
+c=""
+for a in s:
+    if a.isalpha():
+        if v:c+=a.lower();v=0
+        else:c+=a.upper();v=1
+    else:
+        c+=a
+print(c)
+
