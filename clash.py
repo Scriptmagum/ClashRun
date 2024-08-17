@@ -178,8 +178,9 @@ class Clash:
                     break
                 elif re.search(r"^(open|o)\s*$",game,re.IGNORECASE):
                     #editor="vi"if platform=="posix" else "code"
-                    command=[config["editor"],"user.py"]
-                    subprocess.run(command,capture_output=False)#by defauft stdout,stderr is not capture,subprocess.PIPE
+                    os.system(f"{config["editor"]}  user.py")
+                    #command=[config["editor"],"user.py"]
+                    #subprocess.run(command)#by defauft stdout,stderr is not capture,subprocess.PIPE
             else:
                 print("time out")
                 break

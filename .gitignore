@@ -1,3 +1,2 @@
 *.txt
 !requirements.txt
-user.py
