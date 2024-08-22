@@ -22,6 +22,9 @@ C,c=Fore.CYAN,Back.CYAN
 B,b=Fore.BLACK,Back.BLACK
 
 S=Style.BRIGHT
+
+U="\033[4m"
+
 reset= Style.RESET_ALL
 with open("Assets/config.json","r") as file:
     config=json.load(file)
@@ -46,5 +49,9 @@ banner = fr'''{Y}
 {W}Visit us at {C+S}https://github.com/Scriptmagum
 '''
 platform=os.name
-
 langs={"py":"python3","sh":"bash","js":"node","pl":"perl","rb":"ruby"}
+def show_config():
+    print("config".center('-',61))
+    for key in config:
+        if key!="init":print(f"{C}{key.rjust(30)}{W}|{config[key].ljust(30)}")
+

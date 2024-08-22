@@ -120,7 +120,6 @@ class Clash:
             except:
                 raise  Exception(f"{R}{langs[self.sol_file]} not found.try ./install.sh to install all dependencies")
                 quit()
-                
 
             #os.system(f"python user.py < in.txt > out.txt 2>err.txt")
             with open("Assets/out.txt","r") as f:
@@ -177,7 +176,7 @@ class Clash:
         t.start()
         while True:
             game=input(f"{Y}<clash\\>{reset}{W}")
-            search=re.search(r"^(open|o)\s+(py|rb|sh|pl|js)\s*$",game,re.IGNORECASE)
+            search=re.search(r"^(open|o)\s+(py|rb|sh|pl|js)\s*$|^open\s*$",game,re.IGNORECASE)
             if self.time:
                 if re.search(r"^(run|r)\s*$",game,re.IGNORECASE):
                     result=self.check()
@@ -192,7 +191,7 @@ class Clash:
                     self._pass=True
                     break
                 elif search:
-                    self.sol_file=search.group(2).lower()
+                    self.sol_file=search.group(2).lower() if search.group(2) else config["lang"]
                     #editor="vi"if platform=="posix" else "code"
                     os.system(f"{config['editor']}  Assets/user.{self.sol_file}")
                     #command=[config["editor"],"user.py"]
@@ -200,7 +199,7 @@ class Clash:
                 elif re.search(r"^(tests|testcases)\s*$",game,re.IGNORECASE):
                     self.show_testcases()
             else:
-                print(f"{W}time out")
+                print(f"{R+S}time out")
                 break
         t.join() # wait for thread to finish,mdr
        
