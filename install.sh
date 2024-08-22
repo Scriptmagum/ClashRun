@@ -13,7 +13,6 @@ install(){
         echo "$R try sudo apt  update before.."
         exit
         fi
-    
     fi
     echo -e "$C $1 $W[$G OK $W]"  
     sleep 2

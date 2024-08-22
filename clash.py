@@ -114,9 +114,12 @@ class Clash:
             command=[langs[self.sol_file],f"user.{self.sol_file}"]
             try:
                 result=subprocess.run(command,stdin=open("in.txt","r"),stdout=open("out.txt","w"),stderr=open("err.txt","w"),timeout=10)
-            except:
+            except subprocess.TimeoutExpired:
                 print(f"{R}time limit exceed.please try again")
                 return False
+            except:
+                raise  Exception(f"{R}{langs[self.sol_file]} not found.try ./install.sh to install all dependencies")
+                
 
             #os.system(f"python user.py < in.txt > out.txt 2>err.txt")
             with open("out.txt","r") as f:
