@@ -143,8 +143,8 @@ class Clash:
         for test in self.testCases:
                 if test.get("isTest"):
                     print(f"{G}test{i}:")
-                    print(f"{Y+S}input:{W}\n{test.get('testIn')}")
-                    print(f"{Y+S}output:{W}\n{test.get('testOut')}")
+                    print(f"{Y+S}input:{W}\n{test.get('testIn').rstrip()}")
+                    print(f"{Y+S}output:{W}\n{test.get('testOut').rstrip()}")
                     i+=1
     
     def clash_description(self):
@@ -188,9 +188,9 @@ class Clash:
                     self._pass=True
                     break
                 elif search:
-                    self.sol_file=search.group(1)
+                    self.sol_file=search.group(2).lower()
                     #editor="vi"if platform=="posix" else "code"
-                    os.system(f"{config['editor']}  user.py")
+                    os.system(f"{config['editor']}  user.{self.sol_file}")
                     #command=[config["editor"],"user.py"]
                     #subprocess.run(command)#by defauft stdout,stderr is not capture,subprocess.PIPE
                 elif re.search(r"^(tests|testcases)\s*$",game,re.IGNORECASE):

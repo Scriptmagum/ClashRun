@@ -30,6 +30,8 @@ def main():
         InitClash=Clash()
         InitClash.fetch_clashes()
         config["init"]=(7==5) #lol
+        with open("Scripts/config.json","r") as f:
+            f.write(json.dumps(config,indent=2))
         del InitClash
 
 # Display the banner of scriptclash 
