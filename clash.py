@@ -111,7 +111,7 @@ class Clash:
             with open("Assets/in.txt","w",encoding="utf-8") as f:
                 f.write(test.get("testIn"))
         
-            command=[langs[self.sol_file],f"user.{self.sol_file}"]
+            command=[langs[self.sol_file],f"Assets/user.{self.sol_file}"]
             try:
                 result=subprocess.run(command,stdin=open("Assets/in.txt","r"),stdout=open("Assets/out.txt","w"),stderr=open("Assets/err.txt","w"),timeout=10)
             except subprocess.TimeoutExpired:
@@ -194,7 +194,7 @@ class Clash:
                 elif search:
                     self.sol_file=search.group(2).lower()
                     #editor="vi"if platform=="posix" else "code"
-                    os.system(f"{config['editor']}  user.{self.sol_file}")
+                    os.system(f"{config['editor']}  Assets/user.{self.sol_file}")
                     #command=[config["editor"],"user.py"]
                     #subprocess.run(command)#by defauft stdout,stderr is not capture,subprocess.PIPE
                 elif re.search(r"^(tests|testcases)\s*$",game,re.IGNORECASE):
