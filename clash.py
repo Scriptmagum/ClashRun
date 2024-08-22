@@ -28,7 +28,7 @@ class Clash:
         self.constraints=None
         self.solution=None
         self.solution_lang=None
-        self.sol_file=None
+        self.sol_file=config["lang"]
         self.testCases=None
         self.Clashrun_dir=os.path.join(os.path.expanduser("~"),".Clashrun")
         self.Clash_file=os.path.join(self.Clashrun_dir,"Clash.json")
@@ -108,23 +108,24 @@ class Clash:
     def check(self)->bool:
         answers=[]
         for test in self.testCases:
-            with open("in.txt","w",encoding="utf-8") as f:
+            with open("Assets/in.txt","w",encoding="utf-8") as f:
                 f.write(test.get("testIn"))
         
             command=[langs[self.sol_file],f"user.{self.sol_file}"]
             try:
-                result=subprocess.run(command,stdin=open("in.txt","r"),stdout=open("out.txt","w"),stderr=open("err.txt","w"),timeout=10)
+                result=subprocess.run(command,stdin=open("Assets/in.txt","r"),stdout=open("Assets/out.txt","w"),stderr=open("Assets/err.txt","w"),timeout=10)
             except subprocess.TimeoutExpired:
                 print(f"{R}time limit exceed.please try again")
                 return False
             except:
                 raise  Exception(f"{R}{langs[self.sol_file]} not found.try ./install.sh to install all dependencies")
+                quit()
                 
 
             #os.system(f"python user.py < in.txt > out.txt 2>err.txt")
-            with open("out.txt","r") as f:
+            with open("Assets/out.txt","r") as f:
                 out=f.read()
-            with open("err.txt","r") as f:
+            with open("Assets/err.txt","r") as f:
                 err=f.read()
             if out.rstrip()==test.get("testOut").rstrip():
                 print(f"{Y+S}standart output:")
