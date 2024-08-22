@@ -26,12 +26,10 @@ quit: end the game
 
 def main():
     if config["init"]:
+        os.system("bash Scripts/install.sh")
         InitClash=Clash()
         InitClash.fetch_clashes()
         config["init"]=(7==5) #lol
-        config["editor"]="vi"if platform=="posix" else "code"
-        with open("Script/config.json","w",encoding="utf-8") as file:
-            file.write(json.dumps(config,indent=2))
         del InitClash
 
 # Display the banner of scriptclash 
@@ -51,13 +49,13 @@ def main():
             if match_clash:
                 mode=match_clash.group(1).lower() if match_clash.group(1) else random.choice(["fastest","shortest","reverse"])
                 mode="fastest"if mode=='f' else "reverse"if mode=='r' else "shortest" if mode=='s' else mode
-                print(mode)
                 clash=Clash(mode)
                 clash.begin()
             elif match_help:
                 print(help)
             elif match_sol:
                 try:
+                    print(f"{W+S}lang: {G+S}{clash.solution_lang}")
                     print(clash.solution)
                 except:
                     print(f"{R}clash solution not found. play one clash before")

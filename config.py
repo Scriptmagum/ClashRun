@@ -23,7 +23,7 @@ B,b=Fore.BLACK,Back.BLACK
 
 S=Style.BRIGHT
 reset= Style.RESET_ALL
-with open("Script/config.json","r") as file:
+with open("Scripts/config.json","r") as file:
     config=json.load(file)
 banner = fr'''{Y}
                                                                                                                                                                                                             
@@ -46,3 +46,5 @@ banner = fr'''{Y}
 {W}Visit us at {C+S}https://github.com/Scriptmagum
 '''
 platform=os.name
+
+langs={"py":"python3","sh":"bash","js":"node","pl":"perl","rb":"ruby"}
