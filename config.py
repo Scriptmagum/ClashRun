@@ -23,7 +23,7 @@ B,b=Fore.BLACK,Back.BLACK
 
 S=Style.BRIGHT
 reset= Style.RESET_ALL
-with open("Scripts/config.json","r") as file:
+with open("Assets/config.json","r") as file:
     config=json.load(file)
 banner = fr'''{Y}
                                                                                                                                                                                                             

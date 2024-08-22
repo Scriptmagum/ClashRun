@@ -26,11 +26,11 @@ quit: end the game
 
 def main():
     if config["init"]:
-        os.system("bash Scripts/install.sh")
+        os.system("bash Scripts/check.sh")
         InitClash=Clash()
         InitClash.fetch_clashes()
         config["init"]=(7==5) #lol
-        with open("Scripts/config.json","r") as f:
+        with open("Assets/config.json","w") as f:
             f.write(json.dumps(config,indent=2))
         del InitClash
 
@@ -58,7 +58,7 @@ def main():
             elif match_sol:
                 try:
                     print(f"{W+S}lang: {G+S}{clash.solution_lang}")
-                    print(clash.solution)
+                    print(f"{W}{clash.solution}")
                 except:
                     print(f"{R}clash solution not found. play one clash before")
             elif match_quit:

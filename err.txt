@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "C:\Users\maman\OneDrive\Bureau\ClashRun\user.py", line 1, in <module>
-    a,b,c,d=map(int,input().split())
-    ^^^^^^^
-ValueError: invalid literal for int() with base 10: 'Hello'
