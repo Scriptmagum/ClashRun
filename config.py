@@ -51,7 +51,11 @@ banner = fr'''{Y}
 platform=os.name
 langs={"py":"python3","sh":"bash","js":"node","pl":"perl","rb":"ruby"}
 def show_config():
-    print("config".center('-',61))
+    print()
+    print(f"{W}{'_'*61}")
+    print(f"{C+S}{'Keys'.center(30)}{W+S} {'Values'.center(30)}")
+    print(f"{W}{'_'*61}")
     for key in config:
-        if key!="init":print(f"{C}{key.rjust(30)}{W}|{config[key].ljust(30)}")
+        if key not in ["init","site"]:
+            print(f"{C+S if key in ["clash_time","editor","langage"]else C}{key.center(30)}{W+S if key in ["clash_time","editor","langage"] else W} {config[key].center(30)}")
 

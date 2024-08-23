@@ -1,7 +1,11 @@
 {
-  "init": true,
-  "time": 350,
+  "clash_time": "350",
   "site": "https://scriptmagum.github.io/me/bb89dbf7d7540eeb270d91abfd580008.json",
   "editor": "codium",
-  "lang":"py"
+  "langage":"py",
+  "init": true,
+  "version":"1.0",
+  "author":"Zh3_gh05t",
+  "github_author":"https://github.com/Scriptmagum",
+  "about_author":"https://scriptmagum.github.io/me"
 }

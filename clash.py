@@ -20,7 +20,7 @@ class Clash:
         self.mode=mode
         self._pass=False
         self.end=False
-        self.time=config["time"]
+        self.time=int(config["clash_time"])
         self.statement=None
         self.inputDescription=None
         self.outputDescription=None
@@ -28,7 +28,7 @@ class Clash:
         self.constraints=None
         self.solution=None
         self.solution_lang=None
-        self.sol_file=config["lang"]
+        self.sol_file=config["langage"]
         self.testCases=None
         self.Clashrun_dir=os.path.join(os.path.expanduser("~"),".Clashrun")
         self.Clash_file=os.path.join(self.Clashrun_dir,"Clash.json")
@@ -191,7 +191,7 @@ class Clash:
                     self._pass=True
                     break
                 elif search:
-                    self.sol_file=search.group(2).lower() if search.group(2) else config["lang"]
+                    self.sol_file=search.group(2).lower() if search.group(2) else config["langage"]
                     #editor="vi"if platform=="posix" else "code"
                     os.system(f"{config['editor']}  Assets/user.{self.sol_file}")
                     #command=[config["editor"],"user.py"]
