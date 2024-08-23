@@ -20,3 +20,4 @@ install(){
 echo -e "$C installing  dependencing..."
 sleep 2
 install "python3" "python3";install "ruby" "ruby";install "node" "nodejs";install "perl" "perl";install "bash" "bash"
+#thanks
