@@ -1,4 +1,4 @@
-import index
+import lib.index
 
 
 if __name__=="__main__":

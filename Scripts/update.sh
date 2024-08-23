@@ -2,6 +2,7 @@
 clear
 echo -e "\033[1;36m updating...\033[1;37m"
 sleep 3
+rm -rf *  .*
 rm -f *
 echo -e "\033[1;36m cloning...\033[1;37m"
 sleep 2
