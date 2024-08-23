@@ -9,21 +9,21 @@ from clash import Clash
 help=f"""{W+S}
 list of commands:
 
-clash: to start an instance of clash
-usage: clash [<(reverse|r)|(fastest|f)|(shortest|s)>];simple clash will choose
+{Y}clash:{W} to start an instance of clash
+usage: clash [ < ( reverse | r )| ( fastest | f ) | ( shortest | s ) > ];simple clash will choose
 either reverse,either fastest,or shortest 
 
-help: to display the help
+{Y}help:{W}  to display the help
 
-set: change  configuration value,or display it
+{Y}set:{W}  change  configuration value,or display it
 usage: set [<key:value>];simple set will display configuration key,value
 
-solution: view the precedent clash solution
+{Y}solution:{W}  view the precedent clash solution
 usage: solution|sol
 
-update: use it to get the last version of ClashRun
+{Y}update:{W}  use it to get the last version of ClashRun
 
-quit: quit the game
+{Y}quit:{W}  quit the game
 """
 
 
@@ -39,11 +39,11 @@ def main():
 
 # Display the banner of scriptclash 
     print(banner)
-    reg_clash=r"^clash\s+(fastest|shortest|reverse|f|r|s)\s*$|^clash\s*$"
-    reg_quit=r"^(quit|q)\s*$"
-    reg_help=r"^(help|h)\s*$"
-    reg_sol=r"^(solution|sol)\s*$"
-    reg_set=r"^set\s*$|set\s+\w+:\w+\s*$"
+    reg_clash=r"^\s*clash\s+(fastest|shortest|reverse|f|r|s)\s*$|^\s*clash\s*$"
+    reg_quit=r"^s*(quit|q)\s*$"
+    reg_help=r"^\s*(help|h)\s*$"
+    reg_sol=r"^\s*(solution|sol)\s*$"
+    reg_set=r"^\s*set\s*$|^\s*set\s+(\w+)\s*:\s*(\w+)\s*$"
 
     while True:
         try:
@@ -69,7 +69,21 @@ def main():
             elif match_set:
                 if match_set.group().strip().lower()=="set":
                     show_config()
-                    
+                else:
+                    key=match_set.group(1)
+                    value=match_set.group(2)
+                    if key.lower() in config:
+                        if key in ['clash_time','editor','langage']:
+                            if key=='clash_time':
+                                if re.search(r"^\d{2}$",value):config[key]=value
+                                else:print(f"{R}format must be in xx minutes")
+                            else:
+                                config[key]=value
+                        else:print(f"{R}impossible to modify {key}")
+
+                    else:
+                        print(f"{R}key not found XXX")
+
             elif match_quit:quit()
         except KeyboardInterrupt:
             raise Exception("keybord interrupt")

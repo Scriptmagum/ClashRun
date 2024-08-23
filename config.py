@@ -44,9 +44,9 @@ banner = fr'''{Y}
  \   \ .'    ---`-'   |  ,     .-./   `--'---'   `--''         |   |.'      `--`----'     '---'        
   `---`                `--`---'                                `---'                                   
                                                                                                        
-{C+S} version 1.0
-{W}@copyright {C+S}2024{W} by {C+S}zh3_gh05t
-{W}Visit us at {C+S}https://github.com/Scriptmagum
+{C+S} version {config["version"]}
+{W}@copyright {C+S}2024{W} by {C+S}{config["author"]}
+{W}Visit us at {C+S}{config["github_author"]}
 '''
 platform=os.name
 langs={"py":"python3","sh":"bash","js":"node","pl":"perl","rb":"ruby"}
@@ -57,5 +57,5 @@ def show_config():
     print(f"{W}{'_'*61}")
     for key in config:
         if key not in ["init","site"]:
-            print(f"{C+S if key in ["clash_time","editor","langage"]else C}{key.center(30)}{W+S if key in ["clash_time","editor","langage"] else W} {config[key].center(30)}")
-
+            print(f"{C+S if key in ['clash_time','editor','langage']else C}{key.center(30)}{W+S if key in ['clash_time','editor','langage'] else W} {config[key].center(30)}")
+    print()

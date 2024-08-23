@@ -20,7 +20,7 @@ class Clash:
         self.mode=mode
         self._pass=False
         self.end=False
-        self.time=int(config["clash_time"])
+        self.time=int(config["clash_time"])*60
         self.statement=None
         self.inputDescription=None
         self.outputDescription=None
@@ -185,7 +185,8 @@ class Clash:
                         self.end=True
                         break
                 elif re.search(r"^(time|t)\s*$",game,re.IGNORECASE):
-                    print(self.time)
+                    t=self.time
+                    print(f"{t//60}:{t%60}")
                 elif re.search(r"^(pass|p)\s*$",game,re.IGNORECASE):
                     self.time=1
                     self._pass=True
