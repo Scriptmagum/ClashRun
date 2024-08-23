@@ -98,7 +98,7 @@ class Clash:
 
     def init_timer(self):
         while self.time:
-            time.sleep(1.5)
+            time.sleep(1)
             self.time-=1
         if not self.end and not self._pass:
             print()
@@ -185,8 +185,8 @@ class Clash:
                         self.end=True
                         break
                 elif re.search(r"^(time|t)\s*$",game,re.IGNORECASE):
-                    t=self.time
-                    print(f"{t//60}:{t%60}")
+                    tim=self.time
+                    print(f"{tim//60}:{tim%60}")
                 elif re.search(r"^(pass|p)\s*$",game,re.IGNORECASE):
                     self.time=1
                     self._pass=True
