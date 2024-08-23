@@ -83,9 +83,9 @@ def main():
                                 else:print(f"{R}format must be in xx minutes")
                             elif key=="langage":
                                 if value not in langs:
-                                    print(f"\n{w}possibles langages:{G}{'; '.join(langs.keys())}\n")
+                                    print(f"\n{W}possibles langages:{G}{'; '.join(langs.keys())}\n")
                                 else:
-                                    config[key]=value
+                                    config[key]=value.lower()
                                     print(f"\n{C}{key} {W}set to {value}\n")
                             else:
                                 config[key]=value
