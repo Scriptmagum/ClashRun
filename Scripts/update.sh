@@ -1,9 +1,9 @@
 
 clear
-echo "\033[1;36m updating..."
+echo -e "\033[1;36m updating..."
 sleep 3
 cd ..
-rm -rf Clashrun
+rm -rf ClashRun
 git clone 'https://github.com/Scriptmagum/ClashRun.git'
 cd ClashRun
 python3 Clashrun.py
