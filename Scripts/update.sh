@@ -6,5 +6,6 @@ cd ..
 rm -rf ClashRun
 git clone 'https://github.com/Scriptmagum/ClashRun.git'
 sleep 1.5
+clean
 cd ClashRun
 python3 Clashrun.py
