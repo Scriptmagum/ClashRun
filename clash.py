@@ -98,7 +98,7 @@ class Clash:
 
     def init_timer(self):
         while self.time:
-            time.sleep(1)
+            time.sleep(1.5)
             self.time-=1
         if not self.end and not self._pass:
             print()

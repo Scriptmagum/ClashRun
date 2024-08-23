@@ -98,8 +98,12 @@ def main():
                         print(f"{R}key not found XXX")
             elif match_up:
                 os.system("bash Scripts/update.sh")
+                quit()
 
             elif match_quit:quit()
+
+            else:
+                print(f"{W}try to see:{Y+S}help {W}please\n")
         except KeyboardInterrupt:
             raise Exception("keybord interrupt")
 if __name__=="__main__":
