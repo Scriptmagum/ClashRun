@@ -33,29 +33,24 @@ langs={"py":"python3","sh":"bash","js":"node","pl":"perl","rb":"ruby"}
 with open("Assets/config.json","r") as file:
     config=json.load(file)
 
-help=f"""{W+S}
+help=f"""{W+S+U}
 list of commands:
 
-{Y+U}clash:{W} to start an instance of clash
+{Y+U}clash:{reset+W} to start an instance of clash
 usage: clash [ < ( reverse | r )| ( fastest | f ) | ( shortest | s ) > ];simple clash will choose
 either reverse,either fastest,or shortest 
 
-{Y+U}help:{W}  to display the help
+{Y+U}help:{reset+W}  to display the help
 
 {Y+U}set:{W}  change  configuration value,or display it
 usage: set [<key:value>];simple set will display configuration key,value
 
-{Y+U}solution:{W}  view the precedent clash solution
+{Y+U}solution:{reset+W}  view the precedent clash solution
 usage: solution|sol
 
-{Y+U}update:{W}  use it to get the last version of ClashRun
+{Y+U}update:{reset+W}  use it to get the last version of ClashRun
 
-{Y+U}quit:{W}  quit the game
-"""
-banner_text=f"""
-{C+S} version {config["version"]}
-{W}@copyright {C+S}2024{W} by {C+S}{config["author"]}
-{W}Visit us at {C+S}{config["github_author"]}
+{Y+U}quit:{reset+W}  quit the game
 """
 banner = fr'''{Y}
 
@@ -70,6 +65,10 @@ banner = fr'''{Y}
 ░ ░          ░  ░     ░  ░      ░   ░  ░  ░   ░     
 ░                                                   
                                                                                                                                                                                                                                                                                             
+'''
+banner_text=f'''{C+S}version {config["version"]}
+{W}@copyright {C+S}2024{W} by {C+S}{config["author"]}
+{W}Visit us at {C+S}{config["github_author"]}
 '''
 def print_slow(text,delay=0.05):
         for char in text:sys.stdout.write(char);sys.stdout.flush();time.sleep(delay)
