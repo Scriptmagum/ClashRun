@@ -42,7 +42,7 @@ either reverse,either fastest,or shortest
 
 {Y+U}help:{reset+W}  to display the help
 
-{Y+U}set:{W}  change  configuration value,or display it
+{Y+U}set:{reset+W}  change  configuration value,or display it
 usage: set [<key:value>];simple set will display configuration key,value
 
 {Y+U}solution:{reset+W}  view the precedent clash solution
@@ -75,10 +75,10 @@ def print_slow(text,delay=0.05):
         print(f"{reset+W}")
 def show_config():
     print()
-    print(f"{W}{'_'*61}")
-    print(f"{C+S}{'Keys'.center(30)}{W+S} {'Values'.center(30)}")
-    print(f"{W}{'_'*61}")
+    print(f"{W}{'_'*61}{reset+W}")
+    print(f"{C+S}{'Keys'.center(30)}{W+S} {'Values'.center(30)}{reset+W}")
+    print(f"{W}{'_'*61}{reset+W}")
     for key in config:
         if key not in ["init","site"]:
-            print(f"{C+S if key in ['clash_time','editor','langage']else C}{key.center(30)}{W+S if key in ['clash_time','editor','langage'] else W} {config[key].center(30)}")
+            print(f"{C+S if key in ['clash_time','editor','langage']else C}{key.center(30)}{W+S if key in ['clash_time','editor','langage'] else W} {config[key].center(30)}{reset+W}")
     print()

@@ -14,7 +14,8 @@ def main():
         with open("Assets/config.json","w") as f:
             f.write(json.dumps(config,indent=2))
         del InitClash
-# Display the banner of scriptclash 
+# Display the banner of scriptclash
+    os.system("clear")
     print(banner)
     print_slow(banner_text)
     reg_clash=r"^\s*clash\s+(fastest|shortest|reverse|f|r|s)\s*$|^\s*clash\s*$"
