@@ -5,28 +5,6 @@ import sys
 import random
 from config import *
 from clash import Clash
-
-help=f"""{W+S}
-list of commands:
-
-{Y}clash:{W} to start an instance of clash
-usage: clash [ < ( reverse | r )| ( fastest | f ) | ( shortest | s ) > ];simple clash will choose
-either reverse,either fastest,or shortest 
-
-{Y}help:{W}  to display the help
-
-{Y}set:{W}  change  configuration value,or display it
-usage: set [<key:value>];simple set will display configuration key,value
-
-{Y}solution:{W}  view the precedent clash solution
-usage: solution|sol
-
-{Y}update:{W}  use it to get the last version of ClashRun
-
-{Y}quit:{W}  quit the game
-"""
-
-
 def main():
     if config["init"]:
         os.system("bash Scripts/check.sh")
@@ -36,16 +14,15 @@ def main():
         with open("Assets/config.json","w") as f:
             f.write(json.dumps(config,indent=2))
         del InitClash
-
 # Display the banner of scriptclash 
     print(banner)
+    print_slow(banner_text)
     reg_clash=r"^\s*clash\s+(fastest|shortest|reverse|f|r|s)\s*$|^\s*clash\s*$"
     reg_quit=r"^s*(quit|q)\s*$"
     reg_help=r"^\s*(help|h)\s*$"
     reg_sol=r"^\s*(solution|sol)\s*$"
     reg_set=r"^\s*set\s*$|^\s*set\s+(\w+)\s*:\s*(\w+)\s*$"
     reg_up=r"^\s*update\s*$"
-
     while True:
         try:
             read=input(f"{Y}<\\>{reset}{W}")
@@ -93,15 +70,12 @@ def main():
                             with open("Assets/config.json","w") as f:
                                 f.write(json.dumps(config,indent=2))
                         else:print(f"{R}impossible to modify {key}")
-
                     else:
                         print(f"{R}key not found XXX")
             elif match_up:
                 os.system("bash Scripts/update.sh")
                 quit()
-
             elif match_quit:quit()
-
             else:
                 print(f"\n{W}try to see: {Y+S}help {W}please\n")
         except KeyboardInterrupt:
