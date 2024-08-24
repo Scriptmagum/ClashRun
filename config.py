@@ -7,7 +7,7 @@ try:
 except ModuleNotFoundError:
     os.system("pip install colorama ")
     from colorama import Fore,Back,Style,init
-init(autoreset=True)
+init()
 
 B,_b=Fore.BLUE,Back.BLUE
 
@@ -36,7 +36,7 @@ with open("Assets/config.json","r") as file:
 help=f"""{W+S+U}
 list of commands:
 
-{Y+U}clash:{reset+W} to start an instance of clash
+{reset+Y+U}clash:{reset+W} to start an instance of clash
 usage: clash [ < ( reverse | r )| ( fastest | f ) | ( shortest | s ) > ];simple clash will choose
 either reverse,either fastest,or shortest 
 
@@ -63,15 +63,16 @@ banner = fr'''{Y}
   ░  ▒   ░ ░ ▒  ░ ▒   ▒▒ ░░ ░▒  ░ ░ ▒ ░▒░ ░  ░▒ ░ ▒░
 ░          ░ ░    ░   ▒   ░  ░  ░   ░  ░░ ░  ░░   ░ 
 ░ ░          ░  ░     ░  ░      ░   ░  ░  ░   ░     
-░                                                   
+░{reset+W}'''                                                   
                                                                                                                                                                                                                                                                                             
-'''
+
 banner_text=f'''{C+S}version {config["version"]}
 {W}@copyright {C+S}2024{W} by {C+S}{config["author"]}
 {W}Visit us at {C+S}{config["github_author"]}
 '''
 def print_slow(text,delay=0.05):
         for char in text:sys.stdout.write(char);sys.stdout.flush();time.sleep(delay)
+        print(f"{reset+W}")
 def show_config():
     print()
     print(f"{W}{'_'*61}")

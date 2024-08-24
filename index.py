@@ -41,10 +41,10 @@ def main():
                 print(help)
             elif match_sol:
                 try:
-                    print(f"{W+S}lang: {G+S}{clash.solution_lang}")
-                    print(f"{W}{clash.solution}")
+                    print(f"{W+S}lang: {G+S}{clash.solution_lang}{reset+W}")
+                    print(f"{W}{clash.solution}{reset+W}")
                 except:
-                    print(f"{R}clash solution not found. play one clash before")
+                    print(f"{R}clash solution not found. play one clash before{reset+W}")
             elif match_set:
                 if match_set.group().strip().lower()=="set":
                     show_config()
@@ -56,28 +56,28 @@ def main():
                             if key=='clash_time':
                                 if re.search(r"^\d{2}$",value):
                                     config[key]=value
-                                    print(f"\n{C}{key} {W}set to {value}\n")
-                                else:print(f"{R}format must be in xx minutes")
+                                    print(f"\n{C}{key} {W}set to {value}{reset+W}\n")
+                                else:print(f"{R}format must be in xx minutes{reset+W}")
                             elif key=="langage":
                                 if value not in langs:
-                                    print(f"\n{W}possibles langages:{G}{'; '.join(langs.keys())}\n")
+                                    print(f"\n{W}possibles langages:{G}{'; '.join(langs.keys())}{reset+W}\n")
                                 else:
                                     config[key]=value.lower()
-                                    print(f"\n{C}{key} {W}set to {value}\n")
+                                    print(f"\n{C}{key} {W}set to {value}\n{reset+W}")
                             else:
                                 config[key]=value
-                                print(f"\n{C}{key} {W}set to {value}\n")
+                                print(f"\n{C}{key} {W}set to {value}{reset+W}\n")
                             with open("Assets/config.json","w") as f:
                                 f.write(json.dumps(config,indent=2))
-                        else:print(f"{R}impossible to modify {key}")
+                        else:print(f"{R}impossible to modify {key}{reset+W}")
                     else:
-                        print(f"{R}key not found XXX")
+                        print(f"{R}key not found XXX{reset+W}")
             elif match_up:
                 os.system("bash Scripts/update.sh")
                 quit()
             elif match_quit:quit()
             else:
-                print(f"\n{W}try to see: {Y+S}help {W}please\n")
+                print(f"\n{W}try to see: {Y+S}help {W}please{reset+W}\n")
         except KeyboardInterrupt:
             raise Exception("keybord interrupt")
 if __name__=="__main__":
