@@ -109,9 +109,9 @@ class Clash:
         answers=[]
         if self.mode=="shortest":
             with open(f"Assets/user.{self.sol_file}","r") as f:
-                content=f.read()
-            if len(content.strip('\n'))>int(config["limit_characters"]):
-                print(f"{R}characters limit exceed. must be <<{config["limit_characters"]}{reset+W}")
+                content=f.read().strip('\n')
+            if len(content)>int(config['limit_characters']):
+                print(f"{R}characters limit exceed. must be <<{config['limit_characters']}{reset+W}")
                 return False
         for test in self.testCases:
             with open("Assets/in.txt","w",encoding="utf-8") as f:
@@ -152,22 +152,22 @@ class Clash:
         for test in self.testCases:
                 if test.get("isTest"):
                     print(f"{G}test{i}:{reset+W}")
-                    print(f"{Y+S}input:{W}\n{test.get('testIn').rstrip()}{reset+W}")
-                    print(f"{Y+S}output:{W}\n{test.get('testOut').rstrip()}{reset+W}")
+                    print(f"{Y+S}input:{reset+W}\n{test.get('testIn').rstrip()}{reset+W}")
+                    print(f"{Y+S}output:{reset+W}\n{test.get('testOut').rstrip()}{reset+W}")
                     i+=1
     
     def clash_description(self):
         if (self.mode=="fastest" or self.mode=="shortest"):
             print()
-            print(f"{W+S}mode: {C}{self.mode}{reset+W}\n")
-            print(f"{W+S}title: {C}{self.title}{reset+W}\n")
-            print(f"{W+S}statement:\n{W}{self.statement}{reset+W}\n")
-            print(f"{W+S}input description:\n{W}{self.inputDescription}{reset+W}\n"if self.inputDescription else "{reset+W}")
-            print(f"{W+S}output description:\n{W}{self.outputDescription}{reset+W}\n"if self.outputDescription else f"{reset+W}")
-            print(f"{R+S}contraintes: {W}{self.constraints}{reset+W}\n")
+            print(f"{W+S}mode: {reset+C}{self.mode}{reset+W}\n")
+            print(f"{W+S}title: {reset+C}{self.title}{reset+W}\n")
+            print(f"{W+S}statement:\n{reset+W}{self.statement}{reset+W}\n")
+            print(f"{W+S}input description:\n{reset+W}{self.inputDescription}{reset+W}\n"if self.inputDescription else "{reset+W}")
+            print(f"{W+S}output description:\n{reset+W}{self.outputDescription}{reset+W}\n"if self.outputDescription else f"{reset+W}")
+            print(f"{R+S}contraintes: {reset+W}{self.constraints}{reset+W}\n")
             print(f"{G}exemple.test:{reset+W}")
-            print(f"{Y+S}input:{W}\n{self.testCases[0].get('testIn')}{reset+W}")
-            print(f"{Y+S}output:{W}\n{self.testCases[0].get('testOut')}{reset+W}")
+            print(f"{Y+S}input:{reset+W}\n{self.testCases[0].get('testIn')}{reset+W}")
+            print(f"{Y+S}output:{reset+W}\n{self.testCases[0].get('testOut')}{reset+W}")
         else:
             print()
             print(f"{W+S}mode: {C}{self.mode}{reset+W}\n")
@@ -176,8 +176,8 @@ class Clash:
     def show_char(self):
         if self.mode=="shortest":
             with open(f"Assets/user.{self.sol_file}","r") as f:
-                content=f.read()
-            print(f"{W}{len(content.strip('\n'))}{reset+W}")
+                content=f.read().strip('\n')
+            print(f"{W}{len(content)}{reset+W}")
     def begin(self):
         self.start=True
         self.fetch_clash()
@@ -204,7 +204,7 @@ class Clash:
                 elif search:
                     self.sol_file=search.group(2).lower() if search.group(2) else config["langage"]
                    
-                    os.system(f"{config['editor']}  Assets/user.{self.sol_file}{reset+W}")
+                    os.system(f"{config['editor']}  Assets/user.{self.sol_file}")
                    
                 elif re.search(r"^\s*(tests|testcases)\s*$",game,re.IGNORECASE):
                     self.show_testcases()
