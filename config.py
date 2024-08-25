@@ -52,6 +52,28 @@ usage: solution|sol
 
 {Y+U}quit:{reset+W}  quit the game
 """
+help_clash=f"""{W+S+U}
+list of commands:
+
+{reset+Y+U}run:{reset+W} to run and check if your solution is correct
+usage: run | r
+
+{Y+U}open:{reset+W} to open an editor
+usage: open [<py | rb | js | pl | sh> ]; use to open either python,ruby,javascript,perl or bash file
+or simple use, open ,then it will open your default langage
+
+{Y+U}pass:{reset+W}  pass to another clash
+usage: pass
+
+{Y+U}char:{reset+W}  display current numbers of charcaters if mode is shortest
+usage: char
+
+{Y+U}time:{reset+W} display the remaining time before clash finish
+usage: time | t
+
+{Y+U}help:{reset+W}  display help
+usage: help | h
+"""
 banner = fr'''{Y}
 
  ▄████▄   ██▓    ▄▄▄        ██████  ██░ ██  ██▀███  
@@ -80,5 +102,5 @@ def show_config():
     print(f"{W}{'_'*61}{reset+W}")
     for key in config:
         if key not in ["init","site"]:
-            print(f"{C+S if key in ['clash_time','editor','langage']else C}{key.center(30)}{W+S if key in ['clash_time','editor','langage'] else W} {config[key].center(30)}{reset+W}")
+            print(f"{C+S if key in ['clash_time','editor','langage','limit_characters']else C}{key.center(30)}{W+S if key in ['clash_time','editor','langage','limit_characters'] else W} {config[key].center(30)}{reset+W}")
     print()

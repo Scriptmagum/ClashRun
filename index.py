@@ -53,7 +53,7 @@ def main():
                     key=match_set.group(1).lower()
                     value=match_set.group(2)
                     if key in config:
-                        if key in ['clash_time','editor','langage']:
+                        if key in ['clash_time','editor','langage','limit_characters']:
                             if key=='clash_time':
                                 if re.search(r"^\d{2}$",value):
                                     config[key]=value

@@ -107,6 +107,12 @@ class Clash:
 
     def check(self)->bool:
         answers=[]
+        if self.mode=="shortest":
+            with open(f"Assets/user.{self.sol_file}","r") as f:
+                content=f.read()
+            if len(content.strip('\n'))>int(config["limit_characters"]):
+                print(f"{R}characters limit exceed. must be <<{config["limit_characters"]}{reset+W}")
+                return False
         for test in self.testCases:
             with open("Assets/in.txt","w",encoding="utf-8") as f:
                 f.write(test.get("testIn"))
@@ -167,7 +173,11 @@ class Clash:
             print(f"{W+S}mode: {C}{self.mode}{reset+W}\n")
             print(f"{W}The game mode is REVERSE: You don't have access to the statement. You need to figure out what to do by looking at the following test sets:{reset+W}\n")
             self.show_testcases()
-
+    def show_char(self):
+        if self.mode=="shortest":
+            with open(f"Assets/user.{self.sol_file}","r") as f:
+                content=f.read()
+            print(f"{W}{len(content.strip('\n'))}{reset+W}")
     def begin(self):
         self.start=True
         self.fetch_clash()
@@ -176,29 +186,35 @@ class Clash:
         t.start()
         while True:
             game=input(f"{Y}<clash\\>{reset}{W}")
-            search=re.search(r"^(open|o)\s+(py|rb|sh|pl|js)\s*$|^open\s*$",game,re.IGNORECASE)
+            search=re.search(r"^\s*(open|o)\s+(py|rb|sh|pl|js)\s*$|^open\s*$",game,re.IGNORECASE)
             if self.time:
-                if re.search(r"^(run|r)\s*$",game,re.IGNORECASE):
+                if re.search(r"^\s*(run|r)\s*$",game,re.IGNORECASE):
                     result=self.check()
                     if result:
                         self.time=1
                         self.end=True
                         break
-                elif re.search(r"^(time|t)\s*$",game,re.IGNORECASE):
+                elif re.search(r"^\s*(time|t)\s*$",game,re.IGNORECASE):
                     tim=self.time
                     print(f"{tim//60}:{tim%60}")
-                elif re.search(r"^(pass|p)\s*$",game,re.IGNORECASE):
+                elif re.search(r"^\s*(pass|p)\s*$",game,re.IGNORECASE):
                     self.time=1
                     self._pass=True
                     break
                 elif search:
                     self.sol_file=search.group(2).lower() if search.group(2) else config["langage"]
-                    #editor="vi"if platform=="posix" else "code"
+                   
                     os.system(f"{config['editor']}  Assets/user.{self.sol_file}{reset+W}")
-                    #command=[config["editor"],"user.py"]
-                    #subprocess.run(command)#by defauft stdout,stderr is not capture,subprocess.PIPE
-                elif re.search(r"^(tests|testcases)\s*$",game,re.IGNORECASE):
+                   
+                elif re.search(r"^\s*(tests|testcases)\s*$",game,re.IGNORECASE):
                     self.show_testcases()
+
+                elif re.search(r"^\s*(help|h)\s*$",game,re.IGNORECASE):
+                    print(help_clash)
+                elif re.search(r"^\s*(char|c)\s*$",game,re.IGNORECASE):
+                    self.show_char()
+                else:
+                    print(f"\n{W}try to see: {Y+S}help {W}please{reset+W}\n")
             else:
                 print(f"{R+S}time out{reset+W}")
                 break
