@@ -21,7 +21,7 @@ python3 Clashrun.py
 
 NB: I’ll assume all Linux distros have vi installed by default, but for more immersive experience, you can use codium, nano,gedit pluma, or your favorite editor but assume it is installed in your distro before.
 
-set editor:`<editor name>`
+`set editor:<editor name>`
 
 For more commands, just type: `help`
 
