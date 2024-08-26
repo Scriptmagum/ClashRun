@@ -1,7 +1,7 @@
 {
   "clash_time": "15",
   "site": "https://scriptmagum.github.io/me/bb89dbf7d7540eeb270d91abfd580008.json",
-  "editor": "codium",
+  "editor": "vi",
   "langage":"py",
   "limit_characters":"100",
   "init": true,
