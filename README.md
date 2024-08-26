@@ -1,6 +1,6 @@
 # Clashrun
 
-![clashrun](Assets\Clashrun.gif)
+![clashrun](Assets/Clashrun.gif)
 
 Clashrun is a CLI intuitive tool for playing Clash of Code locally, designed for Linux environments. It supports only scripting languages such as Python, Ruby, Perl, Bash, and JavaScript.
 
