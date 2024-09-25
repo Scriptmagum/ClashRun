@@ -1,3 +1,4 @@
+import readline
 import sys,os
 import json
 import re
